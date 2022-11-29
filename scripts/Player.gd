@@ -1,24 +1,28 @@
 extends KinematicBody2D
-
+#Valeurs pour les mouvement du joueur
 export var speed = 80
 export var friction = 0.18
 export var acceleration = 0.1
-var bullet_speed= 2000
+export var atk_speed = 0.1
 
+
+var alive = true
 var velocity = Vector2()
 var current_animation = "idle_down"
 
-onready var attack_cooldown = $Timer
+onready var attack_cooldown = $Atk_speed
+onready var death_timer = $Death_timer
 onready var BULLET = preload("res://scenes/Projectile.tscn")
 onready var animated_body = $AnimatedSprite
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 	
 func _physics_process(_delta):
 	var direction = get_input()
 	deplacer_personnage(direction)
-	#Change aussi l'animation dependament de ce que le joueurs utilise comme mouvement
+	
+#Change aussi l'animation dependament de ce que le joueurs utilise comme mouvement
 func get_input():
 	var input = Vector2()
 	if Input.is_action_pressed('move_right'):
@@ -35,11 +39,10 @@ func get_input():
 		animated_body.play("walk_up")
 	if Input.is_action_pressed("fire") && attack_cooldown.is_stopped():
 		_fire()
-		attack_cooldown.start()
+		attack_cooldown.start(atk_speed)
 		
 	return input
 	
-
 func deplacer_personnage(direction):
 	if direction.length() > 0:
 		velocity = lerp(velocity, direction.normalized() * speed, acceleration)
@@ -54,4 +57,10 @@ func _fire():
 	bullet.global_position = position
 	var direction = get_local_mouse_position().normalized()
 	bullet.set_direction(direction)
-
+	
+	
+func _Death():
+	animated_body.frames.set_animation_loop("dead",false)
+	speed=0
+	death_timer.start()
+	animated_body.play("dead")
