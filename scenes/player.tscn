@@ -128,7 +128,7 @@ extents = Vector2( 5.5, 4.25 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
-animation = "idle_down"
+animation = "walk_up"
 frame = 3
 playing = true
 
