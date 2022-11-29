@@ -63,7 +63,6 @@ animations = [ {
 [sub_resource type="CircleShape2D" id=8]
 
 [node name="Slime" type="KinematicBody2D"]
-scale = Vector2( 2.5, 2.5 )
 input_pickable = true
 script = ExtResource( 2 )
 

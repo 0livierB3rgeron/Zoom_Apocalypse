@@ -1,9 +1,9 @@
 extends KinematicBody2D
 #Valeurs pour les mouvement du joueur
-export var speed = 80
+export var speed = 30
 export var friction = 0.18
 export var acceleration = 0.1
-export var atk_speed = 0.1
+export var atk_speed = 0.7
 
 
 var alive = true
@@ -40,7 +40,6 @@ func get_input():
 	if Input.is_action_pressed("fire") && attack_cooldown.is_stopped():
 		_fire()
 		attack_cooldown.start(atk_speed)
-		
 	return input
 	
 func deplacer_personnage(direction):
@@ -59,6 +58,7 @@ func _fire():
 	bullet.set_direction(direction)
 	
 	
+
 func _Death():
 	animated_body.frames.set_animation_loop("dead",false)
 	speed=0

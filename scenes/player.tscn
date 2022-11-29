@@ -126,7 +126,6 @@ animations = [ {
 extents = Vector2( 5.5, 4.25 )
 
 [node name="Player" type="KinematicBody2D"]
-scale = Vector2( 3, 3 )
 input_pickable = true
 script = ExtResource( 53 )
 atk_speed = 0.8
@@ -134,7 +133,7 @@ atk_speed = 0.8
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "idle_down"
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -142,6 +141,7 @@ shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 0.2, 0.2 )
 smoothing_enabled = true
 
 [node name="Atk_speed" type="Timer" parent="."]
