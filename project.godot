@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Zomb Pocalypse"
-run/main_scene="res://scenes/Main.tscn"
+run/main_scene="res://scenes/Menu.tscn"
 config/icon="res://icon.png"
 
 [display]
