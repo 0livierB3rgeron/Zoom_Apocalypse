@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://assets/Character with pistol/idle/idle left1.png" type="Texture" id=1]
 [ext_resource path="res://assets/Character with pistol/idle/idle left2.png" type="Texture" id=2]
@@ -59,7 +59,7 @@ animations = [ {
 "frames": [ ExtResource( 52 ), ExtResource( 50 ), ExtResource( 49 ), ExtResource( 51 ) ],
 "loop": true,
 "name": "dead",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [ ExtResource( 9 ), ExtResource( 14 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
@@ -123,7 +123,11 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 5.5, 4.25 )
+extents = Vector2( 3, 2.125 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 4.0
+height = 6.0
 
 [node name="Player" type="KinematicBody2D"]
 input_pickable = true
@@ -133,13 +137,15 @@ atk_speed = 0.8
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "idle_down"
-frame = 2
+frame = 3
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3.125 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, 1 )
 current = true
 zoom = Vector2( 0.2, 0.2 )
 smoothing_enabled = true
@@ -150,3 +156,11 @@ one_shot = true
 [node name="Death_timer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionPlayer" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( 0, 1 )
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]

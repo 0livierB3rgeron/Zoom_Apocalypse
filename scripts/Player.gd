@@ -1,5 +1,6 @@
 extends KinematicBody2D
 #Valeurs pour les mouvement du joueur
+
 export var speed = 30
 export var friction = 0.18
 export var acceleration = 0.1
@@ -7,6 +8,8 @@ export var atk_speed = 0.7
 
 
 var alive = true
+var hp = 3
+
 var velocity = Vector2()
 var current_animation = "idle_down"
 
@@ -21,6 +24,8 @@ func _ready():
 func _physics_process(_delta):
 	var direction = get_input()
 	deplacer_personnage(direction)
+	if hp <=0:
+		_Death()
 	
 #Change aussi l'animation dependament de ce que le joueurs utilise comme mouvement
 func get_input():
@@ -37,7 +42,7 @@ func get_input():
 	if Input.is_action_pressed('move_up'):
 		input.y -= 1
 		animated_body.play("walk_up")
-	if Input.is_action_pressed("fire") && attack_cooldown.is_stopped():
+	if Input.is_action_pressed("fire") && attack_cooldown.is_stopped() && alive:
 		_fire()
 		attack_cooldown.start(atk_speed)
 	return input
@@ -57,10 +62,15 @@ func _fire():
 	var direction = get_local_mouse_position().normalized()
 	bullet.set_direction(direction)
 	
-	
-
 func _Death():
+	alive = false
 	animated_body.frames.set_animation_loop("dead",false)
 	speed=0
 	death_timer.start()
 	animated_body.play("dead")
+
+func _on_HitBox_body_entered(body):
+	if body.name == 'Slime':
+		hp= hp-1
+		body._Death()
+	print(hp)
