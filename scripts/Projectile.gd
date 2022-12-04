@@ -17,7 +17,7 @@ func set_direction(direction: Vector2):
 func _on_Projectile_body_entered(body):
 	var areaName = body.name
 	if areaName != "Player":
-		if areaName=='Slime':
+		if body.has_method("_Death"):
 			body._Death()
 		queue_free()
 	
