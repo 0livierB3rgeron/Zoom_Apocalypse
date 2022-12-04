@@ -70,7 +70,7 @@ func _Death():
 	animated_body.play("dead")
 
 func _on_HitBox_body_entered(body):
-	if body.name == 'Slime':
+	if body.has_method("_Death") && body.name != "Player":
 		hp= hp-1
 		body._Death()
-	print(hp)
+	
