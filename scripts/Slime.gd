@@ -4,7 +4,7 @@ extends KinematicBody2D
 onready var death_timer = $Death_timer
 onready var animated_sprite = $AnimatedSprite
 onready var collider = $CollisionShape2D
-export var speed = 25
+export var speed = 40
 onready var player = get_parent().get_parent().get_node("Player")
 onready var enviro = get_parent()
 

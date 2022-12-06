@@ -1,12 +1,10 @@
 extends KinematicBody2D
 #Valeurs pour les mouvement du joueur
 
-export var speed = 30
+export var speed = 50
 export var friction = 0.18
 export var acceleration = 0.1
 export var atk_speed = 0.7
-
-
 var alive = true
 var hp = 3
 
@@ -25,9 +23,8 @@ onready var collision = $PlayerCollision
 func _physics_process(_delta):
 	var direction = get_input()
 	deplacer_personnage(direction)
-	if hp <=0:
-		_Death()
-
+	if alive ==false:
+		animated_body.play("Death")
 #Change aussi l'animation dependament de ce que le joueurs utilise comme mouvement
 func get_input():
 	var input = Vector2()
@@ -53,7 +50,9 @@ func deplacer_personnage(direction):
 		velocity = lerp(velocity, direction.normalized() * speed, acceleration)
 	else:
 		velocity = lerp(velocity, Vector2.ZERO, friction)
-		animated_body.play("idle_down")
+		#As du rajouter sa pour fixer probleme avec le death animation ... #Disapointed
+		if alive==true:
+			animated_body.play("idle_down")
 	velocity = move_and_slide(velocity)	
 
 func _fire():
@@ -67,12 +66,15 @@ func _Death():
 	alive = false
 	player_hitbox.set_deferred("disabled",true)
 	collision.set_deferred("disabled",true)
-	animated_body.frames.set_animation_loop("dead",false)
 	speed=0
 	death_timer.start()
-	animated_body.play("dead")
 
 func _on_HitBox_body_entered(body):
 	if body.has_method("_Death") && body.name != "Player":
 		hp= hp-1
 		body._Death()
+	if hp <= 0:
+		_Death()
+
+func _on_Death_timer_timeout():
+	get_parent()._level_end()

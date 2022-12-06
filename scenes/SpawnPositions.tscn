@@ -24,7 +24,7 @@ position = Vector2( 22, 513 )
 position = Vector2( 693, 524 )
 
 [node name="spawn7" type="Position2D" parent="."]
-position = Vector2( 961, 505 )
+position = Vector2( 971, 519 )
 
 [node name="spawn8" type="Position2D" parent="."]
 position = Vector2( 998, 320 )
@@ -42,7 +42,7 @@ position = Vector2( 290, 25 )
 position = Vector2( 217, 526 )
 
 [node name="RespawnTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 3.5
 one_shot = true
 
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]
