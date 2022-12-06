@@ -40,3 +40,9 @@ position = Vector2( 290, 25 )
 
 [node name="spawn12" type="Position2D" parent="."]
 position = Vector2( 217, 526 )
+
+[node name="RespawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_RespawnTimer_timeout"]

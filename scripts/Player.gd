@@ -18,8 +18,7 @@ onready var death_timer = $Death_timer
 onready var BULLET = preload("res://scenes/Projectile.tscn")
 onready var animated_body = $AnimatedSprite
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+
 	
 func _physics_process(_delta):
 	var direction = get_input()
