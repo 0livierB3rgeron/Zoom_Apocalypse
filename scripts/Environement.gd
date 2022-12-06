@@ -3,7 +3,7 @@ extends Node2D
 var wave  = 1
 var pts = 0
 var ennemiKilled = 0
-var ennemiPerWave = 1
+var ennemiPerWave = 12
 onready var spawnerEnnemiWave = $SpawnPositions
 onready var timer = $WaveStartTimer
 
