@@ -17,15 +17,17 @@ onready var attack_cooldown = $Atk_speed
 onready var death_timer = $Death_timer
 onready var BULLET = preload("res://scenes/Projectile.tscn")
 onready var animated_body = $AnimatedSprite
+onready var player_hitbox = $HitBox/CollisionPlayer
+onready var collision = $PlayerCollision
 # Called when the node enters the scene tree for the first time.
 
-	
+
 func _physics_process(_delta):
 	var direction = get_input()
 	deplacer_personnage(direction)
 	if hp <=0:
 		_Death()
-	
+
 #Change aussi l'animation dependament de ce que le joueurs utilise comme mouvement
 func get_input():
 	var input = Vector2()
@@ -63,6 +65,8 @@ func _fire():
 	
 func _Death():
 	alive = false
+	player_hitbox.set_deferred("disabled",true)
+	collision.set_deferred("disabled",true)
 	animated_body.frames.set_animation_loop("dead",false)
 	speed=0
 	death_timer.start()
@@ -72,4 +76,3 @@ func _on_HitBox_body_entered(body):
 	if body.has_method("_Death") && body.name != "Player":
 		hp= hp-1
 		body._Death()
-	

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slime.png-886e626be12c4cded8e26f7d9f5f624b.stex"
+path="res://.import/slime.png-18f5edf98b170f2d8399fd0c544825ef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Vilain/slime.png"
-dest_files=[ "res://.import/slime.png-886e626be12c4cded8e26f7d9f5f624b.stex" ]
+source_file="res://assets/vilain/slime.png"
+dest_files=[ "res://.import/slime.png-18f5edf98b170f2d8399fd0c544825ef.stex" ]
 
 [params]
 
